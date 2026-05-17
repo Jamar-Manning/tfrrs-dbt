@@ -13,12 +13,6 @@ staged as (
         academic_year,
         team,
         result,
-        case
-            when result like '%:%' then
-                round((split_part(result, ':', 1)::float * 60) + split_part(result, ':', 2)::float, 2)
-            else
-                result::float
-        end as result_seconds,
         converted,
         meet,
         meet_date
