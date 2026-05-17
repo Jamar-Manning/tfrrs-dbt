@@ -1,6 +1,9 @@
 # tfrrs-dbt
 
-A dbt project modeling 1.4M rows of NCAA and NAIA track & field performance data in Snowflake, sourced from [TFRRS](https://www.tfrrs.org/) across 4 divisions and 15 seasons.
+A dbt project modeling 1.4M rows of NCAA and NAIA track & field 
+performance data in Snowflake, sourced from [TFRRS](https://www.tfrrs.org/) 
+across 4 divisions and 15 seasons via a 
+[custom Python scraper](https://github.com/Jamar-Manning/tfrrs-scraper).
 
 ## Lineage
 
@@ -25,9 +28,3 @@ A dbt project modeling 1.4M rows of NCAA and NAIA track & field performance data
 ## Tests
 
 Schema tests validate `not_null` constraints on key columns across staging and intermediate models, and `accepted_values` on event categories.
-
-## Tools
-
-- **dbt** for data modeling and testing
-- **Snowflake** as the warehouse
-- **Python + BeautifulSoup** for the [scraper](https://github.com/Jamar-Manning/tfrrs-scraper)
