@@ -4,3 +4,13 @@ sources:
     schema: tfrrs
     tables:
       - name: performances
+        columns:
+          - name: athlete
+            data_tests:
+              - not_null
+          - name: event
+            data_tests:
+              - not_null
+          - name: meet_date
+            data_tests:
+              - not_null
