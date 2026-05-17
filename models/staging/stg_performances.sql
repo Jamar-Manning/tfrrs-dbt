@@ -10,7 +10,7 @@ staged as (
         athlete,
         year as academic_year,
         team,
-        regexp_replace(result, '[^0-9.]', '') ::float as result, -- Converting to decimals
+        round(regexp_replace(result, '[^0-9\\.]', '')::float, 2) as result, -- Converting to decimals
         converted,
         meet,
         meet_date
