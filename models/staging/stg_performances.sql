@@ -1,5 +1,5 @@
 with source as (
-    select * from raw.tfrrs.performances
+    select * from {{ source('tfrrs', 'performances') }}
 ),
 
 staged as (

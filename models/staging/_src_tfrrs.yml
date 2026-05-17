@@ -1,0 +1,6 @@
+sources:
+  - name: tfrrs
+    database: raw
+    schema: tfrrs
+    tables:
+      - name: performances
