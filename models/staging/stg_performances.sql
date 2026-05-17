@@ -8,7 +8,7 @@ staged as (
         gender,
         place::integer as place,
         athlete,
-        year,
+        year as academic_year,
         team,
         result,
         converted,
