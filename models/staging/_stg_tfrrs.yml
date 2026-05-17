@@ -1,39 +1,50 @@
 models:
   - name: stg_performances
+    description: One row per individual athlete performance scraped from TFRRS NCAA Division I performance lists going back to 2012.
     columns:
       - name: athlete
+        description: Athlete full name in Last, First format.
         data_tests:
           - not_null
       - name: event
+        description: Track and field event name.
         data_tests:
           - not_null
       - name: place
+        description: Finishing place within the performance list.
         data_tests:
           - not_null
       - name: gender
+        description: Athlete gender. m for men, f for women.
         data_tests:
           - not_null
           - accepted_values:
               arguments:
                 values: ['m', 'f']
       - name: meet_date
+        description: Date the performance was recorded.
         data_tests:
           - not_null
       - name: result
+        description: Performance result — time for running events, mark for field events, points for combined events.
         data_tests:
           - not_null
       - name: team
+        description: Athlete's college or university.
         data_tests:
           - not_null
       - name: meet
+        description: Name of the meet where the performance was recorded.
         data_tests:
           - not_null
       - name: academic_year
+        description: Athlete's academic year at time of performance (e.g. JR-3).
         data_tests:
           - not_null:
               config:
                 severity: warn
       - name: converted
+        description: True if the result was adjusted for altitude or track size.
         data_tests:
           - not_null
           - accepted_values:
