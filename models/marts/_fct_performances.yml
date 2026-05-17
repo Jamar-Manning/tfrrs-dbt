@@ -1,0 +1,56 @@
+models:
+  - name: fct_performances
+    columns:
+      - name: event
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_event')
+                field: event
+      - name: gender
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['m', 'f']
+      - name: place
+        data_tests:
+          - not_null
+      - name: athlete
+        data_tests:
+          - not_null
+      - name: academic_year
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+      - name: team
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_team')
+                field: team
+      - name: result
+        data_tests:
+          - not_null
+      - name: converted
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [true, false]
+      - name: meet
+        data_tests:
+          - not_null
+      - name: meet_date
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: meet_date
+      - name: category
+        data_tests:
+          - not_null

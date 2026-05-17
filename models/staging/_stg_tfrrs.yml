@@ -1,0 +1,41 @@
+models:
+  - name: stg_performances
+    columns:
+      - name: athlete
+        data_tests:
+          - not_null
+      - name: event
+        data_tests:
+          - not_null
+      - name: place
+        data_tests:
+          - not_null
+      - name: gender
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['m', 'f']
+      - name: meet_date
+        data_tests:
+          - not_null
+      - name: result
+        data_tests:
+          - not_null
+      - name: team
+        data_tests:
+          - not_null
+      - name: meet
+        data_tests:
+          - not_null
+      - name: academic_year
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+      - name: converted
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [true, false]
