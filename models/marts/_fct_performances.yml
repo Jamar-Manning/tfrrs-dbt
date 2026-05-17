@@ -43,13 +43,6 @@ models:
         description: official mark or time recorded for the performance.
         data_tests:
           - not_null
-      - name: converted
-        description: whether the result was converted for comparability.
-        data_tests:
-          - not_null
-          - accepted_values:
-              arguments:
-                values: [true, false]
       - name: meet
         description: meet where the performance was recorded.
         data_tests:
