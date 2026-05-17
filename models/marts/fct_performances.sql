@@ -12,6 +12,8 @@ dates as (
 
 final as (
     select
+        performances.season_year,
+        performances.season_type,
         performances.event,
         performances.gender,
         performances.place,
