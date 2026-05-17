@@ -1,0 +1,78 @@
+models:
+  - name: fct_performances
+    description: Fact table of all individual NCAA Division I track and field performances joined with event and date dimensions.
+    columns:
+      - name: event
+        description: track and field event for the recorded performance.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_event')
+                field: event
+      - name: gender
+        description: gender category associated with the performance.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['m', 'f']
+      - name: place
+        description: finishing place achieved in the event.
+        data_tests:
+          - not_null
+      - name: athlete
+        description: athlete who recorded the performance.
+        data_tests:
+          - not_null
+      - name: academic_year
+        description: academic year in which the performance occurred.
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+      - name: team
+        description: school or team represented by the athlete.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_team')
+                field: team
+      - name: result
+        description: official mark or time recorded for the performance.
+        data_tests:
+          - not_null
+      - name: converted
+        description: whether the result was converted for comparability.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [true, false]
+      - name: meet
+        description: meet where the performance was recorded.
+        data_tests:
+          - not_null
+      - name: meet_date
+        description: calendar date of the meet.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: meet_date
+      - name: category
+        description: event category used for grouping similar events.
+        data_tests:
+          - not_null
+      - name: meet_year
+        description: calendar year of the meet date.
+      - name: month_number
+        description: numeric month of the meet date.
+      - name: month_name
+        description: month name of the meet date.
+      - name: day_of_week
+        description: numeric day of week for the meet date.
+      - name: day_name
+        description: weekday name of the meet date.
