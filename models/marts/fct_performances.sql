@@ -12,6 +12,7 @@ dates as (
 
 final as (
     select
+        performances.division,
         performances.season_year,
         performances.season_type,
         performances.event,
@@ -21,7 +22,6 @@ final as (
         performances.academic_year,
         performances.team,
         performances.result,
-        performances.converted,
         performances.meet,
         performances.meet_date,
         events.category,

@@ -4,6 +4,7 @@ with source as (
 
 staged as (
     select
+        division,
         season_year,
         season_type,
         event,
@@ -25,7 +26,6 @@ staged as (
             else
                 try_to_double(result)
         end as result_seconds,
-        converted,
         meet,
         meet_date
     from source
