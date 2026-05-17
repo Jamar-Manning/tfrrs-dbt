@@ -4,13 +4,21 @@ with source as (
 
 staged as (
     select
+        season_year,
+        season_type,
         event,
         gender,
-        place::integer as place,
+        place,
         athlete,
-        year as academic_year,
+        academic_year,
         team,
-        round(regexp_replace(result, '[^0-9\\.]', '')::float, 2) as result, -- Converting to decimals
+        result,
+        case
+            when result like '%:%' then
+                round((split_part(result, ':', 1)::float * 60) + split_part(result, ':', 2)::float, 2)
+            else
+                result::float
+        end as result_seconds,
         converted,
         meet,
         meet_date
