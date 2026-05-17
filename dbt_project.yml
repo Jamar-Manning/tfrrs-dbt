@@ -39,7 +39,6 @@ models:
   tfrrs_dbt:
     staging:
       +materialized: view
-      
+
     marts:
       +materialized: table
-    
