@@ -14,10 +14,16 @@ staged as (
         team,
         result,
         case
+            -- Handles times with colons like 4:02.12
             when result like '%:%' then
-                round((split_part(result, ':', 1)::float * 60) + split_part(result, ':', 2)::float, 2)
+                round(
+                    (try_to_double(split_part(result, ':', 1)) * 60) 
+                    + try_to_double(split_part(result, ':', 2)), 
+                    2
+                )
+            -- Safely handles clean numbers and turns "DNF"/"DQ" into NULLs
             else
-                result::float
+                try_to_double(result)
         end as result_seconds,
         converted,
         meet,
