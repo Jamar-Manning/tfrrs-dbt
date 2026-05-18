@@ -23,7 +23,7 @@ across 4 divisions and 15 seasons via a
 - `dim_event` — unique events with category classification
 - `dim_date` — meet date attributes
 - `dim_team` — unique teams
-- `fct_performances` — unified fact table joining all intermediate models with dimension attributes, including a typed `result_numeric` column and `result_type` indicator
+- `fct_performances` — Fact table joining all intermediate models with dimension attributes, including a typed `result_numeric` column and `result_type` indicator
 
 ## Tests
 
