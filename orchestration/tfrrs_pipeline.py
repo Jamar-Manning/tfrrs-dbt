@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.bash import BashOperator
+from airflow.providers.dbt.cloud.operators.dbt import DbtCloudRunJobOperator
+
 
 # These arguments are team dependant.
 default_args = {
@@ -31,16 +33,25 @@ with DAG(
         execution_timeout=timedelta(minutes=60),
     )
 
-    dbt_run = BashOperator(
-        task_id="dbt_run",
-        bash_command="cd /opt/airflow/tfrrs-dbt/ && dbt run",
+    load_to_snowflake = BashOperator(
+        task_id="load_to_snowflake",
+        bash_command=(
+            "cd /opt/airflow/tfrrs-scraper/src/ && "
+            "PYTHONPATH=/opt/airflow/tfrrs-scraper "
+            "SNOWFLAKE_USER=JAMARM "
+            "SNOWFLAKE_ACCOUNT=ihc33676.us-east-1 "
+            "SNOWFLAKE_PRIVATE_KEY_PATH=/opt/airflow/.ssh/snowflake_dbt_pkcs8.p8 "
+            "python load_to_snowflake.py"
+        ),
     )
 
-    dbt_test = BashOperator(
-        task_id="dbt_test",
-        bash_command="cd /opt/airflow/tfrrs-dbt/ && dbt test",
+    dbt_cloud_run = DbtCloudRunJobOperator(
+        task_id="dbt_cloud_run",
+        dbt_cloud_conn_id="dbt_cloud",
+        job_id=70506183132138,
+        wait_for_termination=True,
     )
 
-    generate_urls >> run_scraper >> dbt_run >> dbt_test
+    generate_urls >> run_scraper >> load_to_snowflake >> dbt_cloud_run
 
 
